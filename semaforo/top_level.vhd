@@ -8,7 +8,7 @@ entity top_level is
         CLOCK_50   : in  std_logic;   -- Clock da placa DE2 (27 MHz)
         KEY        : in  std_logic_vector(3 downto 0); -- Botões
         SW         : in  std_logic_vector(9 downto 0); -- Chaves
-        LEDR       : out std_logic_vector(9 downto 0); -- LEDs vermelhos
+        LEDR       : out std_logic_vector(17 downto 0); -- LEDs vermelhos
         LEDG       : out std_logic_vector(7 downto 0)  -- LEDs verdes
     );
 end entity;
@@ -88,6 +88,8 @@ architecture RTL of top_level is
 	end component;
 	
 begin
+	-- clk
+	LEDR(17) <= clk;
 	
 	-- reset
 	reset_n <= SW(6);
