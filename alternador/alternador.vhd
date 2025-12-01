@@ -24,13 +24,13 @@ begin
                 -- alterna o valor de inversor quando a entrada for '1'
                 inversor <= not inversor;
             else
-            	-- resetar o inversor para '1'
-            	inversor <= '1';
+                -- resetar o inversor para '1'
+                inversor <= '1';
             end if;
         end if;
     end process;
 
     -- a saída é o valor de inversor quando entrada = '1'
-    	saida <= '0' when clear_assincrono = '1' else
-    	inversor when entrada = '1' else '0';
+    saida <= '0' when clear_assincrono = '1' else
+            inversor when entrada = '1' else '0';
 end architecture;
