@@ -1,58 +1,145 @@
+-- Arthur Coronho, Lucas Szuster, Murillo Kelvin - Turma PN5
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.std_logic_1164.all;
 
-entity tb_top_level is
+entity tb_calcular_virar_a_direita is
 end entity;
 
-architecture tb of tb_top_level is
-	signal clk : std_logic := '1';
-    signal clk_enable : std_logic := '1';
-    constant tempo : time := 500 us;
-
-
-	signal pedestre : std_logic := '0';
-    signal outro_pedestre : std_logic := '0';
-    signal emergencia : std_logic := '0';
-    signal outra_emergencia : std_logic := '0';
-    signal ativar_night : std_logic := '0';
-    signal reset : std_logic := '0';
-    signal saida_virar_a_direita : std_logic := '0';
-    signal saida_amarelo : std_logic := '0';
-    signal saida_verde : std_logic := '0';
-    signal saida_vermelho : std_logic := '0';
-	signal vetor_estado :  std_logic_vector(2 downto 0);
-    signal vetor_proximo_estado :  std_logic_vector(2 downto 0);
-    
+architecture sim of tb_calcular_virar_a_direita is
+    -- declarações de signals necessários
+    signal pedestre           : std_logic;
+    signal outro_pedestre     : std_logic;
+    signal virar_a_direita    : std_logic;
+    signal emergencia         : std_logic;
+    signal outra_emergencia   : std_logic;
+    constant tempo            : time := 10 ns;
 
 begin
-	-- inicializando o pulso do clock
-    clk <= clk_enable and not clk after tempo / 2;
-    
-    uut: entity work.top_level
-    
-    port map (
-    	clk => clk,
-    	pedestre => pedestre,
-        outro_pedestre => outro_pedestre,
-        emergencia => emergencia,
-        outra_emergencia => outra_emergencia,
-        reset => reset,
-        ativar_night => ativar_night,
-        saida_virar_a_direita => saida_virar_a_direita,
-        saida_verde => saida_verde,
-        saida_amarelo => saida_amarelo,
-        saida_vermelho => saida_vermelho,
-        vetor_estado => vetor_estado,
-        vetor_proximo_estado => vetor_proximo_estado
-    );
-    
+    -- inicializando a uut e realizando o port map
+    uut: entity work.calcular_virar_a_direita
+        port map (
+            pedestre => pedestre,
+            outro_pedestre => outro_pedestre,
+            emergencia => emergencia,
+            outra_emergencia => outra_emergencia,
+            virar_a_direita => virar_a_direita
+        );
+
     stim: process
     begin
-    	wait for tempo * 100;
-        
-        clk_enable <= '0';
-        
+        -- teste 1: 0 0 0 0
+        pedestre <= '0';
+        outro_pedestre <= '0';
+        emergencia <= '0';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 2: 0 0 0 1
+        pedestre <= '0';
+        outro_pedestre <= '0';
+        emergencia <= '0';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 3: 0 0 1 0
+        pedestre <= '0';
+        outro_pedestre <= '0';
+        emergencia <= '1';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 4: 0 0 1 1
+        pedestre <= '0';
+        outro_pedestre <= '0';
+        emergencia <= '1';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 5: 0 1 0 0
+        pedestre <= '0';
+        outro_pedestre <= '1';
+        emergencia <= '0';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 6: 0 1 0 1
+        pedestre <= '0';
+        outro_pedestre <= '1';
+        emergencia <= '0';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 7: 0 1 1 0
+        pedestre <= '0';
+        outro_pedestre <= '1';
+        emergencia <= '1';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 8: 0 1 1 1
+        pedestre <= '0';
+        outro_pedestre <= '1';
+        emergencia <= '1';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 9: 1 0 0 0
+        pedestre <= '1';
+        outro_pedestre <= '0';
+        emergencia <= '0';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 10: 1 0 0 1
+        pedestre <= '1';
+        outro_pedestre <= '0';
+        emergencia <= '0';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 11: 1 0 1 0
+        pedestre <= '1';
+        outro_pedestre <= '0';
+        emergencia <= '1';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 12: 1 0 1 1
+        pedestre <= '1';
+        outro_pedestre <= '0';
+        emergencia <= '1';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 13: 1 1 0 0
+        pedestre <= '1';
+        outro_pedestre <= '1';
+        emergencia <= '0';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 14: 1 1 0 1
+        pedestre <= '1';
+        outro_pedestre <= '1';
+        emergencia <= '0';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- teste 15: 1 1 1 0
+        pedestre <= '1';
+        outro_pedestre <= '1';
+        emergencia <= '1';
+        outra_emergencia <= '0';
+        wait for tempo;
+
+        -- teste 16: 1 1 1 1
+        pedestre <= '1';
+        outro_pedestre <= '1';
+        emergencia <= '1';
+        outra_emergencia <= '1';
+        wait for tempo;
+
+        -- fim da simulação
         wait;
     end process;
 end architecture;
