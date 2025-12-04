@@ -4,7 +4,7 @@ use IEEE.std_logic_1164.ALL;
 entity tb_data_path is
 end entity;
 
-architecture behavior of tb_data_path is
+architecture arq of tb_data_path is
     -- Sinais para o UUT (Unit Under Test)
     signal clk : std_logic := '1';
     signal clk_enable : std_logic := '1';
