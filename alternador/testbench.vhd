@@ -30,7 +30,7 @@ begin
     stim: process
     begin
     	-- estímulos de entrada
-    	 clear_assincrono <= '0';
+		clear_assincrono <= '0';
         entrada <= '1'; wait for tempo*5;
         entrada <= '0'; wait for tempo*5;
         entrada <= '1'; wait for tempo*10;
@@ -40,7 +40,7 @@ begin
                 
         -- testando clear
         clear_assincrono <= '1';
-        entrada <= '1'; wait for tempo*5;
+		entrada <= '1'; wait for tempo*5;
         entrada <= '0'; wait for tempo*5;
         entrada <= '1'; wait for tempo*10;
         entrada <= '0'; wait for tempo*5;
